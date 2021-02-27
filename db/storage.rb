@@ -1,4 +1,4 @@
-module API
+module Api
   class Storage
 
     def initialize

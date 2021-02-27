@@ -1,5 +1,4 @@
-
-module API
+module Api
   class Tracker
     include Validator
 
@@ -9,7 +8,7 @@ module API
 
     def initialize(env)
       @request = Rack::Request.new(env)
-      @store = API::Storage.new
+      @store = Api::Storage.new
     end
 
     def response
