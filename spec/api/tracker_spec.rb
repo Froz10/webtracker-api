@@ -8,9 +8,7 @@ RSpec.describe Api::Tracker do
   subject(:storage) { Api::Storage.new }
 
   let(:wrong_path) { '/wrong_route' }
-  let(:params_links) { ['google.com', 'mail.ru', 'http://ya.ru'] }
-  let(:params_links_from) { ['google.com', 'mail.ru', 'ya.ru'] }
-  let(:params_links_to) { ['funbox.ru', 'stackoverflow.com'] }
+  let(:params_links) { ['funbox.ru', 'google.com', 'mail.ru', 'stackoverflow.com', 'ya.ru'] }
   let(:params_domains) do
     { from: Time.now.to_i - 10,
       to: Time.now.to_i }
@@ -56,11 +54,9 @@ RSpec.describe Api::Tracker do
 
   context 'when GET api path' do
     it 'returns domains from storage' do
-      storage.write_session('links', params_domains[:from], params_links_from)
-      storage.write_session('links', params_domains[:to], params_links_to)
+      storage.write_session('links', params_domains[:from], params_links)
       get(urls[:get], { 'from' => params_domains[:from], 'to' => params_domains[:to] })
-      expect(last_response.body).to eq({ domains: params_links_from + params_links_to , status: 'ok' }.to_json)
+      expect(last_response.body).to eq({ domains: params_links, status: 'ok' }.to_json)
     end
-
   end
 end

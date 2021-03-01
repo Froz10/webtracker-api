@@ -15,7 +15,7 @@ module Api
       case @request.path
       when '/visited_links' then visited_links
       when '/visited_domains' then visited_domains
-      else Rack::Response.new('Not found', 404)
+      else not_found
       end
     end
 
@@ -38,7 +38,7 @@ module Api
           uniq_domains = @store.find_session('links', @request.params['from'].to_i, @request.params['to'].to_i)
           response.body = [{ domains: uniq_domains, status: 'ok' }.to_json]
         end
-      else Rack::Response.new('Not found', 404)
+      else not_found
       end
     end
 
@@ -46,6 +46,14 @@ module Api
       Rack::Response.new do |response|
         response.headers['Content-Type'] = 'application/json'
         response.status = 500
+        response.body = [{ status: response.status }.to_json]
+      end
+    end
+
+    def not_found
+      Rack::Response.new do |response|
+        response.headers['Content-Type'] = 'application/json'
+        response.status = 404
         response.body = [{ status: response.status }.to_json]
       end
     end

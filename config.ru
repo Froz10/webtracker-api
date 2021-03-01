@@ -6,6 +6,7 @@ require 'json'
 require 'redis'
 require 'uri'
 require 'pry'
+require 'pry-byebug'
 
 use Rack::Reloader
 run Api::Tracker
