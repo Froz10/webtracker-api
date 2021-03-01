@@ -46,7 +46,6 @@ jobs:
     executor: default
     steps:
       - setup_environment
-      - run_specs
 
 workflows:
   version: 2.1
