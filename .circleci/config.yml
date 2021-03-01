@@ -6,6 +6,7 @@ executors:
     description: The official CircleCI RubyDocker image
     docker:
       - image: circleci/ruby:2.6.5
+      - image: redis
 
 caches:
   - &bundle_cache v1-repo-{{ checksum "Gemfile.lock" }}
@@ -31,6 +32,7 @@ commands:
           key: *bundle_cache
       - run: gem install bundler -v 2.1.2
       - run: bundle install --path vendor/bundle
+      - run: dockerize -wait tcp://localhost:6379 -timeout 1m
       - save_cache:
           key: *bundle_cache
           paths:
