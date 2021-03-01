@@ -11,8 +11,11 @@ GET /visited_domains?from=`params`&to=`params` resource is used to get a GET req
 
 ## Installation
 
-$ bundle install
-$ rackup
+    $ bundle install
+
+And then execute:
+
+     $ rackup
 
 ## Contributing
 
