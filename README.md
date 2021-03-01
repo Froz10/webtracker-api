@@ -2,7 +2,7 @@
 
 Welcome to Webtracker-api! In this directory, you'll find the files you need to be able this application.
 Clone code in your directory. To experiment with that code, run `bundle install` then `rackup`.
-This application provides an API service in the form of processing two requests.
+This application provides an JSON API service in the form of processing two HTTP resources.
 
 POST /visited_links resource is used to send an array of links to the service in a POST request. The time of their visit is the time when the request was received by the service. Time parameters are synchronized by Unix Epoch.
 
